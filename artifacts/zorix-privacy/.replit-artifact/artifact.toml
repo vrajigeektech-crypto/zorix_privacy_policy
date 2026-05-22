@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Zorix Privacy Policy"
+version = "1.0.0"
+id = "artifacts/zorix-privacy"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23336
+
+[services.development]
+run = "pnpm --filter @workspace/zorix-privacy run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/zorix-privacy", "run", "build" ]
+publicDir = "artifacts/zorix-privacy/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23336"
+BASE_PATH = "/"
